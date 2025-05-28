@@ -30,8 +30,7 @@ namespace OrderService.Infrastructure.Migrations
 
                     b.Property<string>("CodigoExterno")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
@@ -52,8 +51,7 @@ namespace OrderService.Infrastructure.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PedidoId")
                         .HasColumnType("uniqueidentifier");
