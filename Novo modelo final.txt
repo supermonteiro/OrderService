@@ -1,0 +1,47 @@
+                    +----------------------+
+                    |   Sistema Externo A  |
+                    +----------+-----------+
+                               |
+                        [HTTP POST]
+                               |
+                               v
+                   +-----------+------------+
+                   |     API Gateway /      |
+                   |     OrderService.API   |
+                   +-----------+------------+
+                               |
+                               v
+                   +-----------+------------+
+                   |     OrderService.App   |  ← Lógica de negócio
+                   +-----------+------------+
+                               |
+                               v
+                        [Fila de Pedidos]          🟢 (RabbitMQ, Azure Service Bus)
+                               |
+                       (consumidor assíncrono)
+                               v
+                +--------------+---------------+
+                |     Background Worker        |  ← Processa pedidos em lote
+                | (.NET Worker com DI e EF)    |
+                +--------------+---------------+
+                               |
+                         [EF Core / UnitOfWork]
+                               |
+                               v
+                        +------+------+
+                        |   SQL Server |
+                        +-------------+
+
+                               ↑
+                         [HTTP GET]
+                               ↑
+               +---------------+---------------+
+               |     Sistema Externo B         |
+               +-------------------------------+
+
+
+Cache com Redis para leitura de pedidos recentes
+
+Paginação e filtros nos endpoints de leitura
+
+Logs estruturados e Application Insights

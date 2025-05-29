@@ -46,4 +46,32 @@ public class PedidoController : ControllerBase
 
         return Ok(resultado);
     }
+
+    /// <summary>
+    /// Lista todos os pedidos com seus produtos.
+    /// </summary>
+    [HttpGet]
+    public async Task<IActionResult> ObterTodos()
+    {
+        var pedidos = await _pedidoService.ObterTodosAsync();
+
+        if (!pedidos.Any())
+            return NoContent();
+
+        return Ok(pedidos);
+    }
+
+    /// <summary>
+    /// Consulta um pedido por ID.
+    /// </summary>
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> ObterPorId(Guid id)
+    {
+        var pedido = await _pedidoService.ObterPorIdAsync(id);
+
+        if (pedido == null)
+            return NotFound();
+
+        return Ok(pedido);
+    }
 }

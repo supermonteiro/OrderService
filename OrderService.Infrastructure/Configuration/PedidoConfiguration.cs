@@ -10,9 +10,8 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.CodigoExterno)
-               .IsRequired()
-               .HasMaxLength(100);
+        builder.HasIndex(p => p.CodigoExterno)
+               .IsUnique();
 
         builder.Property(p => p.DataCriacao)
                .IsRequired();
