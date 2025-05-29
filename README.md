@@ -29,7 +29,7 @@
 
 ### 🔄 Receber pedidos (Sistema A)
 
-```http
+http
 POST /api/pedido
 Exemplo de body:
 
